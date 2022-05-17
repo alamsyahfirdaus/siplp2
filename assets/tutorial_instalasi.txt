@@ -1,0 +1,18 @@
+1. Buat Database dengan nama apk_plp2.
+2. Import Database yang terdapat pada folder assets > sql.
+
+Login Sebagai Administrator
+Username : alamsyah.firdaus.af31@gmail.com
+Password : alamsyah.firdaus.af31@gmail.com
+
+Login Sebagai Dosen
+Username : 0409088202
+Password : 0409088202
+
+Login Sebagai Guru Pamong
+Username : 2833756656200002
+Password : 2833756656200002
+
+Login Sebagai Mahasiswa
+Username : C1783207002
+Password : C1783207002
