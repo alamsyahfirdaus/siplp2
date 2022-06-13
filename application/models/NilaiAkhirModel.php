@@ -20,6 +20,7 @@ class NilaiAkhirModel extends CI_Model {
 		if ($this->input->post('program_studi_id')) {
 			$this->db->where('md5(program_studi_id)', $this->input->post('program_studi_id'));
 		}
+		$this->db->order_by('no_induk', 'asc');
 		$this->db->group_by('id_pengguna_mhs');
 	}
 

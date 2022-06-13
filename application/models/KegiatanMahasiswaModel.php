@@ -34,7 +34,7 @@ class KegiatanMahasiswaModel extends CI_Model {
 			$id_kegiatan_mahasiswa = md5($field->id_kegiatan_mahasiswa);
 			$tanggal  	 = $field->tanggal ? $this->include->datetime($field->tanggal) : '-';
 			$kegiatan 	 = $field->kegiatan ? $field->kegiatan : '-';
-			$dokumentasi = $field->dokumentasi ? '<img src="'. site_url(IMAGE . $field->dokumentasi) .'" alt="" style="max-width: 250px;">' : '-';
+			$dokumentasi = $field->dokumentasi ? '<img src="'. site_url(IMAGE . $field->dokumentasi) .'" alt="" style="width: 200px; height: 150px;">' : '-';
 
 			$row[]  = '<p style="text-align: center;">'. $no++ .'</p>';
 			$row[]  = '<p style="text-align: left;">'. $tanggal .'</p>';

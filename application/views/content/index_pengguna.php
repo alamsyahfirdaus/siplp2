@@ -74,7 +74,7 @@
           </div>
         </div>
         <div class="form-group">
-          <img id="image" src="" alt="" style="width: 100%; display: block;">
+          <img id="image" src="" alt="" style="width: 100%; height: 250px;">
         </div>
       </div>
       <div class="modal-footer justify-content-between">
@@ -144,7 +144,7 @@
           var message = $('[name="foto_profil"]').val() ? 'Berhasil Menghapus Foto ' + title : 'Berhasil Mengubah Foto ' + title;
           set_flashdata(message);
           setTimeout(function() {
-            if (response.id_pengguna == '<?= md5($this->session->id_pengguna) ?>') {
+            if (response.id_pengguna == '<?= base64_encode($this->session->id_pengguna) ?>') {
               window.location.reload();
             } else {
               $('#form')[0].reset();

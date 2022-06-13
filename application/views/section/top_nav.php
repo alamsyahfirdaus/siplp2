@@ -74,7 +74,7 @@
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" style="padding-top: 4px; color: #FFFFFF;">
 
             <?php if (@$query->foto_profil): ?>
-              <img src="<?= base_url(IMAGE . $this->include->image(@$query->foto_profil)) ?>" alt="" class="img-circle" style="max-width: 34px; max-height: 34px; margin-top: auto; margin-bottom: auto; vertical-align: middle;">
+              <img src="<?= base_url(IMAGE . $this->include->image(@$query->foto_profil)) ?>" alt="" class="img-circle" style="width: 34px; height: 34px; margin-top: auto; margin-bottom: auto; vertical-align: middle;">
             <?php else: ?>
                 <?php
                 $nama_lengkap = explode(' ', $query->nama_lengkap);

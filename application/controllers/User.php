@@ -261,6 +261,7 @@ class User extends CI_Controller {
 			$output = array(
 				'status' 		=> $action,
 				'message' 		=> $message,
+				'id_pengguna'	=> base64_encode($pengguna_id),
 			);
 		}
 

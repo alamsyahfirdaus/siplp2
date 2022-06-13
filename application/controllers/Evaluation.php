@@ -302,15 +302,16 @@ class Evaluation extends CI_Controller {
 		if ($this->form_validation->run() == FALSE) {
 			redirect('evaluation/score');
 		} else {
+
 			$tahun_pelaksanaan 	= $this->year->getRow($this->input->post('tahun_pelaksanaan_id'));
 			$program_studi 		= $this->prodi->getData($this->input->post('program_studi_id'));
 
-			// $mahasiswa = array();
-			// foreach (explode(',', $this->input->post('id_pengguna_mhs')) as $id_pengguna_mhs) {
-			// 	$query = $this->_getKelompokMhs(md5($id_pengguna_mhs));
-			// 	$nilai_mhs = $this->score->nilai_akhir($id_pengguna_mhs)['huruf'];
-			// 	$mahasiswa[$id_pengguna_mhs] = array($query['nim'], $query['nama_mhs'], $query['sekolah_mitra'], $nilai_mhs);
-			// }
+			$pengguna_id = array();
+			foreach (explode(',', $this->input->post('id_pengguna_mhs')) as $id_pengguna_mhs) {
+				$pengguna_id[] = $id_pengguna_mhs;
+			}
+
+			$query = $this->db->select('p.id_pengguna, p.no_induk as nim, p.nama_lengkap')->join('mahasiswa m', 'p.id_pengguna = m.pengguna_id', 'left')->where_in('p.id_pengguna', $pengguna_id)->order_by('p.no_induk', 'asc')->get('pengguna p')->result();
 
 			$content = '<h2 style="text-align: center;">Hasil Penilaian PLP 2</h2>';
 			$content .= '<table class="table" cellpadding="5">';
@@ -335,16 +336,18 @@ class Evaluation extends CI_Controller {
 			$content .= '<th style="width: 10%;">Nilai</th>';
 			$content .= '</tr>';
 			$number = 1;
-			foreach (explode(',', $this->input->post('id_pengguna_mhs')) as $id_pengguna_mhs) {
-				$query = $this->_getKelompokMhs(md5($id_pengguna_mhs));
-				$nilai_mhs = $this->score->nilai_akhir($id_pengguna_mhs)['huruf'];
+			foreach ($query as $row) {
+				$sekolah_mitra 		= $this->_getKelompokMhs(md5($row->id_pengguna))['sekolah_mitra'];
+				$nilai_mahasiswa  	= $this->score->nilai_akhir($row->id_pengguna)['huruf'];
+
 				$content .= '<tr>';
 				$content .= '<td style="text-align: center;">'. $number++ .'</td>';
-				$content .= '<td style="padding-left: 6px;">'. $query['nim'] .'</td>';
-				$content .= '<td style="padding-left: 6px;">'. $query['nama_mhs'] .'</td>';
-				$content .= '<td style="padding-left: 6px;">'. $query['sekolah_mitra'] .'</td>';
-				$content .= '<td style="text-align: center;">'. $nilai_mhs .'</td>';
+				$content .= '<td style="padding-left: 6px;">'. $row->nim .'</td>';
+				$content .= '<td style="padding-left: 6px;">'. $row->nama_lengkap .'</td>';
+				$content .= '<td style="padding-left: 6px;">'. $sekolah_mitra .'</td>';
+				$content .= '<td style="text-align: center;">'. $nilai_mahasiswa .'</td>';
 				$content .= '</tr>';
+
 			}
 			$content .= '</table>';
 			$content .= '<script>window.print();</script>';

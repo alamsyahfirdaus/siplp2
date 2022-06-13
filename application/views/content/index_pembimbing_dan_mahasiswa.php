@@ -98,7 +98,7 @@
                           foreach ($kelompok_mahasiswa as $key) {
 
                             $kegiatan    = $key->kegiatan ? $key->kegiatan : false;
-                            $dokumentasi  = $key->dokumentasi ? '<img src="'. site_url(IMAGE . $key->dokumentasi) .'" alt="" style="max-width: 300px;">' : '-';
+                            $dokumentasi  = $key->dokumentasi ? '<img src="'. site_url(IMAGE . $key->dokumentasi) .'" alt="" style="width: 200px; height: 200px;">' : '-';
 
                             $tbody .= '<td style="text-align: center;">'. $no++ .'</td>';
                             $tbody .= '<td style="text-align: center;" id="nim_'. $key->id_kegiatan_mahasiswa .'">'. $key->no_induk .'</td>';
@@ -144,11 +144,11 @@
                           </div>
                           <?php if (@$pengguna->kartu_rencana_studi): ?>
                             <div class="form-group">
-                              <img src="<?= site_url(IMAGE . $pengguna->kartu_rencana_studi) ?>" style="width: 100%; max-height: 345px;">
+                              <img src="<?= site_url(IMAGE . $pengguna->kartu_rencana_studi) ?>" style="width: 100%; height: 250px;">
                             </div>
                           <?php else: ?>
                             <div class="form-group" id="row-kartu_rencana_studi" style="display: none;">
-                              <img src="" id="preview-kartu_rencana_studi" style="width: 100%; max-height: 345px;">
+                              <img src="" id="preview-kartu_rencana_studi" style="width: 100%; height: 250px;">
                             </div>
                           <?php endif ?>
                         </div>
@@ -165,11 +165,11 @@
                           </div>
                           <?php if (@$pengguna->kwitansi_pembayaran): ?>
                             <div class="form-group">
-                              <img src="<?= site_url(IMAGE . $pengguna->kwitansi_pembayaran) ?>" style="width: 100%; max-height: 345px;">
+                              <img src="<?= site_url(IMAGE . $pengguna->kwitansi_pembayaran) ?>" style="width: 100%; height: 250px;">
                             </div>
                           <?php else: ?>
                             <div class="form-group" id="row-kwitansi_pembayaran" style="display: none;">
-                              <img src="" id="preview-kwitansi_pembayaran" style="width: 100%; max-height: 345px;">
+                              <img src="" id="preview-kwitansi_pembayaran" style="width: 100%; height: 250px;">
                             </div>
                           <?php endif ?>
                           <div class="form-group">
@@ -213,7 +213,7 @@
                 <tr>
                   <td colspan="2" style="padding-top: 0px; border-top: none; text-align: center; width: 50%;">
                     <?php if (isset($pengguna->foto_profil)): ?>
-                      <img class="" src="<?= site_url(IMAGE . $pengguna->foto_profil) ?>" alt="" style="max-width: 125px;">
+                      <img class="" src="<?= site_url(IMAGE . $pengguna->foto_profil) ?>" alt="" style="width: 200px; height: 200px;">
                     <?php else: ?>
                       <?php
                       $nama_lengkap = explode(' ', $pengguna->nama_lengkap);
