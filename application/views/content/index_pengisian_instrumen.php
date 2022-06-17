@@ -82,7 +82,7 @@
                   <tr>
                     <th style="width: 5%; text-align: center;">No</th>
                     <th style="text-align: left;">Pernyataan</th>
-                    <th style="width: 25%; text-align: center;">Skor</th>
+                    <th style="width: 30%; text-align: center;">Skor</th>
                   </tr>
                 </thead>
                 <tfoot>
@@ -110,7 +110,7 @@
                         <div class="form-group">
                           <div class="custom-control custom-checkbox">
                             <input type="checkbox" name="selesai" class="custom-control-input" id="check-selesai">
-                            <label class="custom-control-label" for="check-selesai">Simpan & Selesai</label>
+                            <label class="custom-control-label" for="check-selesai">Selesai</label>
                             <button type="submit" id="btn-submit" class="btn btn-default btn-sm float-right"><i class="fas fa-save"></i> Simpan</button>
                           </div>
                         </div>
