@@ -54,6 +54,7 @@ class Teacher extends CI_Controller {
 			'nim'					=> $pengguna->no_induk,
 			'nama_mahasiswa'		=> $pengguna->nama_lengkap,
 			'kelompok_mahasiswa'	=> $this->_get_kelompok_mahasiswa($pengguna->id_pengguna),
+			'kegiatan_mahasiswa'	=> $this->db->get_where('kegiatan_mahasiswa', ['md5(pengguna_id)' => $pengguna_id])->result()
 		);
 
 		$this->include->topnav('index_kegiatan_mahasiswa', $data);
@@ -194,7 +195,7 @@ class Teacher extends CI_Controller {
 		}
 	}
 
-	public function update_selesai($pengguna_id, $penilaian_id)
+	public function update_selesai($id_pengguna_mhs, $penilaian_id)
 	{
 		$this->form_validation->set_rules('id_hasil_penilaian', '', 'trim|required');
 
@@ -202,13 +203,13 @@ class Teacher extends CI_Controller {
 			redirect(site_url());
 		} else {
 			$id_hasil_penilaian = explode(',', $this->input->post('id_hasil_penilaian'));
-
 			foreach ($id_hasil_penilaian as $id) {
 				$this->db->update('hasil_penilaian', ['selesai' => 1], ['id_hasil_penilaian' => $id]);
 			}
 
-			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissible" style="font-weight: bold;">Berhasil Menyimpan Penilaian Mahasiswa</div>');
-			redirect('teacher/rating/' . $pengguna_id . '/' . $penilaian_id);
+			$this->session->set_flashdata('success', '<div class="alert alert-success alert-dismissible" style="font-weight: bold;">Penilaian Mahasiswa Berhasil Disimpan!</div>');
+
+			redirect('teacher/rating/' . $id_pengguna_mhs . '/' . $penilaian_id);
 		}
 	}
 

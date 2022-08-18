@@ -33,6 +33,11 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">Daftar Kegiatan</h5>
+                <div class="float-right">
+                  <?php if ($count_km): ?>
+                    <a href="<?= site_url('home/printactivity/'. md5(@$row->id_pengguna)) ?>" target="_blank" class="btn btn-default btn-sm"><i class="fas fa-print"></i> Cetak</a>
+                  <?php endif ?>
+                </div>
               </div>
               <div class="card-body table-responsive">
                 <table id="table" class="table" style="width: 100%;">
@@ -97,7 +102,11 @@
                     <img src="" id="preview-dokumentasi" style="width: 100%; max-height: 325px;">
                   </div>
                   <div class="form-group">
-                    <button type="button" id="btn-kegiatan_mahasiswa" class="btn btn-default btn-sm float-right"><i class="fas fa-save"></i> Simpan</button>
+                    <?php if ($row->status_pendaftaran): ?>
+                      <button type="button" id="btn-kegiatan_mahasiswa" class="btn btn-default btn-sm float-right"><i class="fas fa-save"></i> Simpan</button>
+                    <?php else: ?>
+                      <small style="color: #dc3545; ">*) Pendaftaran Belum Diterima.</small>
+                    <?php endif ?>
                   </div>
                 </form>
               </div>
@@ -108,7 +117,9 @@
                 <h5 class="card-title">Resume Pembekalan</h5>
                 <div class="card-tools">
                   <?php if (!$id_mahasiswa): ?>
+                    <?php if ($row->status_pendaftaran): ?>
                       <a href="javascript:void(0)" class="btn btn-tool" onclick="edit_resume_pembekalan();"><i class="fas fa-edit"></i></a>
+                    <?php endif ?>
                   <?php else: ?>
                     <a href="javascript:void(0)" class="btn btn-tool btn-refresh"><i class="fas fa-sync"></i></a>
                   <?php endif ?>
@@ -272,7 +283,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-8">
+                  <div class="<?= count($kegiatan_mahasiswa) > 0 ? 'col-md-6' : 'col-md-8' ?>">
                     <table class="table table-responsive" style="width: 100%;">
                       <tr>
                         <td style="width: 45%; padding-top: 0px; border: none; font-weight: bold;">NIM</td>
@@ -286,6 +297,11 @@
                       </tr>
                     </table>
                   </div>
+                  <?php if (count($kegiatan_mahasiswa) > 0): ?>
+                    <div class="col-md-2">
+                      <a href="<?= site_url('home/printactivity/'. $pengguna_id) ?>" target="_blank" class="btn btn-default btn-sm" style="float: right;"><i class="fas fa-print"></i> Cetak</a>
+                    </div>
+                  <?php endif ?>
                 </div>
               </div>
               <div class="card-body table-responsive" style="border-top: 1px solid #DEE2E6;">

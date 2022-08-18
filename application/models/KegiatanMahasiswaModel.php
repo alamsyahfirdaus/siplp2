@@ -98,8 +98,30 @@ class KegiatanMahasiswaModel extends CI_Model {
 		} else {
 			return false;
 		}
+	}
 
+	public function findKegiatanByMhs($pengguna_id)
+	{
+		// Get Kegiatan Berdasarkan Tahun Pelaksanaan dan Mahasiswa
+		
+		$this->load->model('TahunPelaksanaanModel', 'tpm');
+		$tahun_pelaksanaan 		= $this->tpm->getRow();
+		$tahun_pelaksanaan_id 	= $tahun_pelaksanaan->id_tahun_pelaksanaan;
 
+		$this->db->select('km.id_kelompok_mahasiswa');
+		$this->db->select('km.pengguna_id');
+		$this->db->select('p.no_induk as nim');
+		$this->db->select('p.nama_lengkap');
+		$this->db->select('tp.tahun_pelaksanaan');
+		$this->db->select('ps.program_studi');
+		$this->db->join('kelompok_sekolah ks', 'km.kelompok_sekolah_id = ks.id_kelompok_sekolah', 'left');
+		$this->db->join('pengguna p', 'km.pengguna_id = p.id_pengguna', 'left');
+		$this->db->join('tahun_pelaksanaan tp', 'ks.tahun_pelaksanaan_id = tp.id_tahun_pelaksanaan', 'left');
+		$this->db->join('program_studi ps', 'ks.program_studi_id = ps.id_program_studi', 'left');
+		$this->db->where('md5(km.pengguna_id)', $pengguna_id);
+		$this->db->where('ks.tahun_pelaksanaan_id', $tahun_pelaksanaan_id);
+		$this->db->limit(1);
+		return $this->db->get('kelompok_mahasiswa km')->row();
 	}
 
 }

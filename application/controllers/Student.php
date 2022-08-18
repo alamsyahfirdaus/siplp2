@@ -36,6 +36,7 @@ class Student extends CI_Controller {
 			'id_kegiatan_mahasiswa'	=> $this->input->post('id_kegiatan_mahasiswa'),
 			'tanggal'				=> $tanggal,
 			'kegiatan_mahasiswa'	=> $kegiatan_mahasiswa,
+			'count_km'				=> $this->db->get_where('kegiatan_mahasiswa', ['pengguna_id' => $query->id_pengguna])->num_rows(),
 		);
 
 		$this->include->topnav('index_kegiatan_mahasiswa', $data);

@@ -49,6 +49,7 @@
                   <th style="text-align: center;">Skor</th>
                   <th style="text-align: center;">Bobot</th>
                   <th style="text-align: center;">Nilai</th>
+                  <!-- <th style="text-align: center;">Perubahan<span style="color: #ffffff;">_</span>Nilai</th> -->
                   <th style="width: 10%; text-align: center;">Aksi</th>
                 </tr>
               </thead>

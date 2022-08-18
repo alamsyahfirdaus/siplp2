@@ -160,6 +160,9 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Kegiatan Mahasiwa</h3>
+            <div class="float-right">
+              <a href="<?= site_url('home/printactivity/'. md5(@$row->id_pengguna)) ?>" target="_blank" class="btn btn-default btn-sm"><i class="fas fa-print"></i> Cetak</a>
+            </div>
           </div>
           <div class="card-body table-responsive">
             <table id="table" class="table" style="width: 100%;">

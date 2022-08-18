@@ -194,6 +194,12 @@ function table_penilaian() {
     },
     "drawCallback": function(settings) {
      $('#id_hasil_penilaian').val(settings.json.id_hasil_penilaian);
+     $('#form_selesai').attr('action', settings.json.update_selesai);
+     if (settings.json.checked == 1) {
+      $('#check-selesai').attr('checked', true);
+     } else {
+      $('#check-selesai').removeAttr('checked');
+     }
      if (settings.json.selesai == 1) {
        $('#check-selesai').attr('disabled', true);
        $('#btn-submit').attr('disabled', true);
@@ -201,12 +207,7 @@ function table_penilaian() {
       $('#check-selesai').removeAttr('disabled');
       $('#btn-submit').removeAttr('disabled');
      }
-     if (settings.json.checked == 1) {
-      $('#check-selesai').attr('checked', true);
-     } else {
-      $('#check-selesai').removeAttr('checked');
-      $('#form_selesai').attr('action', '<?= site_url('teacher/update_selesai/') ?>' + settings.json.checked);
-     }
+
     },
     "columnDefs": [{ 
       "targets": [0],

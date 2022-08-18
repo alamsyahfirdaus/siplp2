@@ -59,7 +59,6 @@ class PenilaianPembimbingModel extends CI_Model {
 		$query 		= $this->_hasil_penilaian($idp);
 		$ihp  		= $query['id_hasil_penilaian'] != null ? count($query['id_hasil_penilaian']) : 0;
 		$dpi 		= $idp > 0 ? count($idp) : 0;
-		$update 	= md5($this->input->post('id_pengguna_mhs')) . '/' . md5($this->input->post('penilaian_id'));
 
 		return array(
 			'draw' 					=> $this->input->post('draw'),
@@ -67,8 +66,9 @@ class PenilaianPembimbingModel extends CI_Model {
 			'recordsFiltered' 		=> $this->db->get($this->_setBuilder())->num_rows(),
 			'data' 					=> $data,
 			'id_hasil_penilaian'	=> $query['id_hasil_penilaian'],
-			'selesai'				=> $dpi != $ihp || $query['id_selesai'] > 0 ? 1 : 0,
-			'checked'				=> $dpi == $ihp && $query['id_selesai'] > 0 ? 1 : $update,
+			'update_selesai'		=> site_url('teacher/update_selesai/'. md5($this->input->post('id_pengguna_mhs')) . '/' . md5($this->input->post('penilaian_id'))),
+			'checked'				=> $dpi == $ihp && $query['id_selesai'] > 0 ? 1 : 0,
+			'selesai'				=> $dpi != $ihp ? 1 : 0,
 		);
 	}
 
@@ -81,10 +81,10 @@ class PenilaianPembimbingModel extends CI_Model {
 		for ($i = 1; $i <= $field->skala; $i++) { 
 
 			$checked 	= $query['skor'] == $i ? 'checked' : '';
-			$disabled	= $query['selesai'] == 1 ? 'disabled' : '';
+			// $disabled	= $query['selesai'] == 1 ? 'disabled' : '';
 
 			$radio .= '<div class="icheck-primary d-inline">';
-			$radio .= '<input type="radio" name="skor_'. $field->id_detail_penilaian .'" id="skor_'. $field->id_detail_penilaian .'_'. $i .'" onclick="add_data('. $i .', '. $field->id_detail_penilaian .', '. $query['ihp'] .')" '. $checked .' '. $disabled .'>';
+			$radio .= '<input type="radio" name="skor_'. $field->id_detail_penilaian .'" id="skor_'. $field->id_detail_penilaian .'_'. $i .'" onclick="add_data('. $i .', '. $field->id_detail_penilaian .', '. $query['ihp'] .')" '. $checked .'>';
 			$radio .= '<label for="skor_'. $field->id_detail_penilaian .'_'. $i .'" style="margin-right: 8px;">'. $i .'</label>';
 			$radio .= '</div>';
 		}

@@ -25,15 +25,8 @@ class Login extends CI_Controller {
 
 	private function _login()
 	{
-		$email = $this->_get_data([
-			'email' 	=> $this->input->post('id_pengguna'),
-			'password'	=> sha1($this->input->post('password'))
-		]);
-
-		$no_induk = $this->_get_data([
-			'no_induk' 	=> $this->input->post('id_pengguna'),
-			'password'	=> sha1($this->input->post('password'))
-		]);
+		$email 		= $this->_get_data(['email' => $this->input->post('id_pengguna')]);
+		$no_induk 	= $this->_get_data(['no_induk' => $this->input->post('id_pengguna')]);
 
 		if ($email) {
 			$query = $email;
@@ -44,12 +37,9 @@ class Login extends CI_Controller {
 		}
 
 		if ($query) {
-
-
 			if ($query->password == sha1($this->input->post('password'))) {
-
 				// if ($query->status_pendaftaran == 1) {
-
+					
 					$this->db->update('pengguna', ['login_terakhir' => date('Y-m-d H:i:s')], ['id_pengguna' => $query->id_pengguna]);
 
 					$this->session->set_userdata([
@@ -60,24 +50,22 @@ class Login extends CI_Controller {
 					$output = array('status' => TRUE);
 
 				// } else {
-				// 	$output = [
+				// 	$output = array(
 				// 		'status' 	=> FALSE,
-				// 		'message'	=> 'LOGIN GAGAL',
-				// 	];
+				// 		'message'	=> 'LOGIN GAGAL!',
+				// 	);
 				// }
-
 			} else {
-				$output = [
+				$output = array(
 					'status' 	=> FALSE,
-					'errors'	=> array('password' => 'Password salah')
-				];
+					'errors' 	=> array('password' => 'Password salah, coba lagi.')
+				);
 			}
-			
 		} else {
-			$output = [
+			$output = array(
 				'status' 	=> FALSE,
-				'message'	=> 'AKUN PENGGUNA TIDAK DITEMUKAN',
-			];
+				'errors' 	=> array('id_pengguna' => 'Akun Pengguna tidak ditemukan.')
+			);
 		}
 
 		echo json_encode($output);

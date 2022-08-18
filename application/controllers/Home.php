@@ -399,8 +399,64 @@ class Home extends CI_Controller {
 		}
 
 		echo json_encode($output);
+	}
 
+	public function printactivity($pengguna_id = null)
+	{
+		$this->load->model('KegiatanMahasiswaModel', 'kmm');
+		$query = $this->kmm->findKegiatanByMhs($pengguna_id);
 
+		if (empty($query->id_kelompok_mahasiswa)) {
+			redirect(site_url());
+		}
+
+		$content = '<h2 style="text-align: center;">Kegiatan Mahasiswa PLP 2</h2>';
+		$content .= '<table class="table" cellpadding="5">';
+		$content .= '<tr>';
+		$content .= '<td style="font-weight: bold; width: 20%;">NIM</td>';
+		$content .= '<td style="width: 5%;">:</td>';
+		$content .= '<td style="width: 25%;">'. $query->nim .'</td>';
+		$content .= '<td style="font-weight: bold;">Tahun Pelaksanaan</td>';
+		$content .= '<td>:</td>';
+		$content .= '<td>'. $query->tahun_pelaksanaan .'</td>';
+		$content .= '</tr>';
+		$content .= '<tr>';
+		$content .= '<td style="font-weight: bold; width: 20%;">Nama Mahasiswa</td>';
+		$content .= '<td style="width: 5%;">:</td>';
+		$content .= '<td style="width: 25%;">'. $query->nama_lengkap .'</td>';
+		$content .= '<td style="font-weight: bold;">Program Studi</td>';
+		$content .= '<td>:</td>';
+		$content .= '<td>'. $query->program_studi .'</td>';
+		$content .= '</tr>';
+		$content .= '</table>';
+		$content .= '<br>';
+		$content .= '<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%;">';
+		$content .= '<tr>';
+		$content .= '<th style="width: 5%;">No</th>';
+		$content .= '<th>Tanggal</th>';
+		$content .= '<th>Kegiatan</th>';
+		$content .= '<th style="width: 15%;">Dokumentasi</th>';
+		$content .= '</tr>';
+		$number = 1;
+		foreach ($this->db->get_where('kegiatan_mahasiswa', ['pengguna_id' => $query->pengguna_id])->result() as $row) {
+
+			$tanggal  	 = $row->tanggal ? $this->include->datetime($row->tanggal) : '-';
+			$kegiatan 	 = $row->kegiatan ? $row->kegiatan : '-';
+			$dokumentasi = $row->dokumentasi ? '<img src="'. site_url(IMAGE . $row->dokumentasi) .'" alt="" style="width: 175px; height: 100px;">' : '-';
+
+			$content .= '<tr>';
+			$content .= '<td style="text-align: center;">'. $number++ .'</td>';
+			$content .= '<td style="padding-left: 6px;">'. $tanggal .'</td>';
+			$content .= '<td style="padding-left: 6px;">'. $kegiatan .'</td>';
+			$content .= '<td style="text-align: center; padding-left: 6px;">'. $dokumentasi .'</td>';
+			$content .= '</tr>';
+
+		}
+		$content .= '</table>';
+		$content .= '<script>window.print();</script>';
+		$content .= '<style media="print">@page {size: auto; margin: 24px;}</style>';
+
+		echo $content;
 	}
 
 }

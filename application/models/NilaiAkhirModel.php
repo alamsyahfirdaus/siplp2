@@ -20,6 +20,7 @@ class NilaiAkhirModel extends CI_Model {
 		if ($this->input->post('program_studi_id')) {
 			$this->db->where('md5(program_studi_id)', $this->input->post('program_studi_id'));
 		}
+		$this->db->where('selesai', 1);
 		$this->db->order_by('no_induk', 'asc');
 		$this->db->group_by('id_pengguna_mhs');
 	}
@@ -51,6 +52,7 @@ class NilaiAkhirModel extends CI_Model {
 			$row[]  = '<p style="text-align: center;">'. $nilai['skor'] .'</p>';
 			$row[]  = '<p style="text-align: center;">'. $nilai['angka'] .'</p>';
 			$row[]  = '<p style="text-align: center;">'. $nilai['huruf'] .'</p>';
+			// $row[]  = '<p style="text-align: center;">-</p>';
 			$row[]  = $this->_getButton($field);
 
 			$data[]	= $row;
@@ -81,7 +83,7 @@ class NilaiAkhirModel extends CI_Model {
 
 	public function nilai_akhir($pengguna_id)
 	{
-		$query = $this->db->join('detail_penilaian', 'detail_penilaian.id_detail_penilaian = hasil_penilaian.detail_penilaian_id', 'left')->where('id_pengguna_mhs', $pengguna_id)->group_by('penilaian_id')->where('selesai', 1)->group_by('id_pengguna_penilai')->get('hasil_penilaian')->result();
+		$query = $this->db->join('detail_penilaian', 'detail_penilaian.id_detail_penilaian = hasil_penilaian.detail_penilaian_id', 'left')->where('id_pengguna_mhs', $pengguna_id)->where('selesai', 1)->group_by('penilaian_id')->group_by('id_pengguna_penilai')->get('hasil_penilaian')->result();
 
 		foreach ($query as $row) {
 			$penilaian 			= $this->db->get_where('penilaian', ['id_penilaian' => $row->penilaian_id])->row();
