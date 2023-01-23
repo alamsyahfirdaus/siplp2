@@ -1,4 +1,4 @@
-<!-- <form class="user" action="" method="post" id="form">
+<form class="user" action="" method="post" id="form">
     <div class="form-group">
         <input type="text" class="form-control form-control-user" id="id_pengguna" name="id_pengguna" placeholder="Akun Pengguna" autocomplete="off" style="font-size: 14px;">
         <span id="error-id_pengguna" class="error invalid-feedback" style="display: none;"></span>
@@ -8,9 +8,9 @@
         <span id="error-password" class="error invalid-feedback" style="display: none;"></span>
     </div>
     <button type="submit" class="btn btn-user btn-block" id="btn-submit">Login</button>
-</form> -->
+</form>
 
-<form action="" action="" method="post" id="form">
+<!-- <form action="" action="" method="post" id="form">
     <div class="form-group" style="padding-top: 6px;">
         <input type="text" class="form-control" id="id_pengguna" name="id_pengguna" placeholder="Akun Pengguna" autocomplete="off">
         <span id="error-id_pengguna" class="error invalid-feedback" style="display: none;"></span>
@@ -27,7 +27,7 @@
     <div class="form-group" style="padding-top: 6px;">
         <button type="submit" class="btn btn-user btn-block" id="btn-submit">Login</button>
     </div>
-</form>
+</form> -->
 
 <?php $tahun_pelaksanaan = $this->db->get_where('tahun_pelaksanaan', [
     'status_pelaksanaan'    => 1,

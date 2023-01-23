@@ -177,6 +177,7 @@ class User extends CI_Controller {
 
 		$this->form_validation->set_message('required', '{field} harus diisi.');
 		$this->form_validation->set_message('is_unique', '{field} sudah terdaftar.');
+		$this->form_validation->set_message('numeric', '{field} hanya boleh berisi angka.');
 
 		if ($this->form_validation->run() == FALSE) {
 			$output = [

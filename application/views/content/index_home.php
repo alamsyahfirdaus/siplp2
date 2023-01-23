@@ -13,7 +13,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-4 col-6">
-        <div class="small-box bg-white">
+        <div class="small-box bg-primary">
           <div class="inner">
             <h3><?= $dosen ?></h3>
             <p>Dosen</p>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="col-lg-4 col-6">
-        <div class="small-box bg-white">
+        <div class="small-box bg-orange">
           <div class="inner" style="">
             <h3><?= $guru_pamong ?></h3>
             <p>Guru Pamong</p>
@@ -35,8 +35,8 @@
         </div>
       </div>
       <div class="col-lg-4 col-12">
-        <div class="small-box bg-white">
-          <div class="inner" style="">
+        <div class="small-box bg-yellow">
+          <div class="inner">
             <h3><?= $mahasiswa ?></h3>
             <p>Mahasiswa</p>
           </div>
@@ -90,14 +90,14 @@
 
 <style type="text/css">
   .inner {
-    color: #222284;
-    border-top: 3px solid #222284;
+    color: white;
+/*    border-top: 3px solid white;*/
   }
   .inner>p {
     font-weight: bold;
   }
 
   .icon>i{
-    color: #222284;
+    color: white;
   }
 </style>
